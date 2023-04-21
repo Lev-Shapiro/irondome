@@ -1,14 +1,22 @@
 import { Coords } from "domain/types/coords";
 
-export class BuildingElement {
-    constructor(public readonly wrapper: HTMLDivElement, public readonly element: HTMLImageElement) {}
+export abstract class BuildingElement {
+    constructor(
+        public readonly wrapper: HTMLDivElement,
+        public readonly element: HTMLImageElement,
+        public readonly width: number,
+        public readonly height: number
+    ) {
+        this.element.width = this.width;
+        this.element.height = this.height;
+    }
 
     destroy() {
         this.element.remove();
     }
 
     setCoords(coords: Coords) {
-        this.element.style.left = `${coords.x}px`;
-        this.element.style.top = `${coords.y}px`;
+        this.wrapper.style.left = `${coords.x - this.width / 2}px`;
+        this.wrapper.style.top = `${coords.y - this.height / 2}px`;
     }
 }

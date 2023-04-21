@@ -9,22 +9,25 @@ export class MissileFactory {
 
     build(coords: Coords) {
         const wrapper = document.createElement("div");
+        wrapper.className = "object";
+
         const image = document.createElement("img");
 
-        image.className = "object missile";
         image.alt = "Missile";
         image.src = "/missile.webp";
-        
-        image.width = this.width / 8;
-        image.height = this.height / 8;
 
-        const element = new MissileElement(wrapper, image);
+        const element = new MissileElement(
+            wrapper,
+            image,
+            this.width / 8,
+            this.height / 8
+        );
 
         element.setCoords(coords);
 
         wrapper.appendChild(image);
-        this.parent.appendChild(image);
+        this.parent.appendChild(wrapper);
 
-        return element
+        return element;
     }
 }

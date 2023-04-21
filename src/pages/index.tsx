@@ -60,7 +60,7 @@ export default function Home() {
             });
 
             await controller.launch(missile1, myHouse.coords);
-            // await controller.explode(missile1, myHouse);
+            await controller.explode(missile1, myHouse);
         });
     }, [explosionRef, houseRef, missilesRef]);
 
