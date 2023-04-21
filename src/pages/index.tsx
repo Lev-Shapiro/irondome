@@ -3,76 +3,66 @@ import { createRef, useEffect } from "react";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 
-import { MissileController } from "domain/missile/missile.controller";
+import { MissileController } from "domain/buildings/missile/missile.controller";
 
 import styles from "styles/Home.module.css";
 
-import { ExplodeFactory } from "domain/explode/explode.factory";
-import { MissileFactory } from "domain/missile/missile.factory";
-import { MissileModel } from "domain/missile/missile.model";
+import { HouseFactory } from "domain/buildings/house/house.factory";
+import { MissileFactory } from "domain/buildings/missile/missile.factory";
 import { km1200hour } from "domain/mocks/speed.mocks";
+import { ExplodeFactory } from "domain/buildings/explode/explode.factory";
+
+import { HouseImageLevel } from "domain/enums/images/house-image-levels";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const missiles: MissileModel[] = [];
-
 export default function Home() {
+    const explosionRef = createRef<HTMLDivElement>();
+    const houseRef = createRef<HTMLDivElement>();
     const missilesRef = createRef<HTMLDivElement>();
 
     useEffect(() => {
-        const missilesDiv = missilesRef.current;
-        if (!missilesDiv) return;
+        var disabled = false;
 
-        const explodesFactory = new ExplodeFactory();
-        const missileFactory = new MissileFactory(missilesDiv);
+        const explosion = explosionRef.current;
+        const missiles = missilesRef.current;
+        const house = houseRef.current;
+        if (!explosion || !missiles || !house) return;
+
+        const houseFactory = new HouseFactory(house);
+
+        const explodesFactory = new ExplodeFactory(explosion);
+        const missileFactory = new MissileFactory(missiles);
 
         const controller = new MissileController(
             missileFactory,
             explodesFactory
         );
 
-        // for(var i = 0; i < 10; i++) {
-        //     const randX = Math.floor(Math.random() * window.innerWidth);
-        //     const randY = Math.floor(Math.random() * window.innerHeight);
+        document.addEventListener("mousemove", async (e) => {
+            if(disabled) return;
+            disabled = true;
+            setTimeout(() => disabled = false, 500);
 
-        //     const missile = controller.create(km1200hour, {
-        //         x: randX,
-        //         y: randY,
-        //     })
-
-        //     missiles.push(missile);
-        // }
-
-        document.addEventListener("mousemove", async(e) => {
             const missile1 = controller.create(km1200hour, {
                 x: window.innerWidth / 2,
                 y: window.innerHeight / 2,
             });
 
-            const missile2 = controller.create(km1200hour, {
+            // const missile2 = controller.create(km1200hour, {
+            //     x: e.clientX,
+            //     y: e.clientY,
+            // });
+
+            const myHouse = houseFactory.build(HouseImageLevel.lvl1, {
                 x: e.clientX,
                 y: e.clientY,
             });
 
-
-            await controller.launch(missile1, missile2.coords);
-            await controller.explode(missile1, missile2);
+            await controller.launch(missile1, myHouse.coords);
+            await controller.explode(missile1, myHouse);
         });
-
-        // const fuckThatShit = async () => {
-        //     missiles.forEach(async (_, i) => {
-        //         if (i === 0) return;
-
-        //         const missile1 = missiles[i - 1];
-        //         const missile2 = missiles[i];
-
-        //         await controller.launch(missile1, missile2.coords);
-        //         await controller.explode(missile1, missile2);
-        //     });
-        // };
-
-        // fuckThatShit();
-    }, [missilesRef]);
+    }, [explosionRef, houseRef, missilesRef]);
 
     return (
         <>
@@ -91,7 +81,8 @@ export default function Home() {
 
             <main className={styles.main}>
                 <div id="missiles" ref={missilesRef}></div>
-                <div id="explodes"></div>
+                <div id="houses" ref={houseRef}></div>
+                <div id="explodes" ref={explosionRef}></div>
             </main>
         </>
     );

@@ -2,22 +2,14 @@ import { MissileElement } from "./missile.element";
 import { MissileEntity } from "./missile.entity";
 
 import { Coords } from "domain/types/coords";
-import { Locator } from "domain/locate.dto";
 
-export class MissileModel {
+import { BuildingModel } from "../abstract/model.abstract";
+
+export class MissileModel extends BuildingModel<MissileElement, MissileEntity> {
     renderInterval = 40;
 
-    constructor(
-        private element: MissileElement,
-        private entity: Locator<MissileEntity>
-    ) {}
-
-    get coords() {
-        return this.entity.coords;
-    }
-
     rotate(to: Coords) {
-        const from = this.entity.coords;
+        const from = this.coords;
 
         const coords =
             (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 90;
@@ -39,8 +31,8 @@ export class MissileModel {
                 }
 
                 this.setCoords({
-                    x: this.entity.coords.x + deltaX,
-                    y: this.entity.coords.y + deltaY,
+                    x: this.coords.x + deltaX,
+                    y: this.coords.y + deltaY,
                 });
 
                 counter--;
@@ -48,15 +40,11 @@ export class MissileModel {
         });
     }
 
-    remove() {
-        this.element.destroy();
-    }
-
     private calculate(target: Coords) {
         const speed = this.entity.speed.pixelsPerMillisecond;
 
-        const dx = target.x - this.entity.coords.x,
-            dy = target.y - this.entity.coords.y;
+        const dx = target.x - this.coords.x,
+            dy = target.y - this.coords.y;
 
         const distance = Math.sqrt(dx * dx + dy * dy);
 
@@ -70,6 +58,6 @@ export class MissileModel {
 
     private setCoords(coords: Coords) {
         this.element.setCoords(coords);
-        this.entity.coords = {...coords};
+        this.coords = {...coords};
     }
 }
