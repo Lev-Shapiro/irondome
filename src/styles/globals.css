@@ -4,12 +4,7 @@
   box-sizing: border-box;
 }
 
-.missile {
+.object {
   position: absolute;
   /* transform: translate(-50%, -50%); */
-}
-
-.explode {
-  position: absolute;
-  transform: translate(-50%, -50%);
 }
