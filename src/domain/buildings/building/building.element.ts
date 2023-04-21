@@ -1,4 +1,4 @@
-import { Coords } from "domain/types/coords";
+import { Coords } from "type";
 
 export abstract class BuildingElement {
     constructor(

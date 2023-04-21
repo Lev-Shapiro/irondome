@@ -1,6 +1,7 @@
-import { Coords } from "domain/types/coords";
-import { BuildingElement } from "./element.abstract";
-import { BuildingEntity } from "./entity.abstract";
+import { BuildingElement, BuildingEntity } from "buildings/building";
+
+import { Coords } from "domain/type/coords";
+
 
 export abstract class BuildingModel<
     Element extends BuildingElement = BuildingElement,

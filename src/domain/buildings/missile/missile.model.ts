@@ -1,9 +1,8 @@
-import { MissileElement } from "./missile.element";
-import { MissileEntity } from "./missile.entity";
+import { BuildingModel } from "buildings/building";
 
-import { Coords } from "domain/types/coords";
+import type { MissileElement, MissileEntity } from "buildings/missile";
 
-import { BuildingModel } from "../abstract/model.abstract";
+import type { Coords } from "type";
 
 export class MissileModel extends BuildingModel<MissileElement, MissileEntity> {
     renderInterval = 40;
@@ -58,6 +57,6 @@ export class MissileModel extends BuildingModel<MissileElement, MissileEntity> {
 
     private setCoords(coords: Coords) {
         this.element.setCoords(coords);
-        this.coords = {...coords};
+        this.coords = { ...coords };
     }
 }

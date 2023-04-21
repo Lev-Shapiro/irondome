@@ -1,13 +1,10 @@
-import { MissileFactory } from "./missile.factory";
+import { Coords } from "type";
 
-import { Coords } from "domain/types/coords";
+import { BuildingModel } from "buildings/building";
+import { SpeedDto } from "dto";
 
-import { MissileModel } from "./missile.model";
-
-import { SpeedDto } from "domain/dtos/speed.dto";
-import { ExplodeFactory } from "domain/buildings/explode/explode.factory";
-import { MissileEntity } from "./missile.entity";
-import { BuildingModel } from "../abstract/model.abstract";
+import { ExplodeFactory } from "buildings/explode";
+import { MissileEntity, MissileFactory, MissileModel } from "buildings/missile";
 
 export class MissileController {
     constructor(

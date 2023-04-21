@@ -1,3 +1,3 @@
-import { BuildingElement } from "../abstract/element.abstract";
+import { BuildingElement } from "buildings/building";
 
 export class HouseElement extends BuildingElement {}

@@ -1,5 +1,6 @@
-import { Coords } from "domain/types/coords";
-import { MissileElement } from "./missile.element";
+import type { Coords } from "type";
+
+import { MissileElement } from "buildings/missile";
 
 export class MissileFactory {
     private height = 673;

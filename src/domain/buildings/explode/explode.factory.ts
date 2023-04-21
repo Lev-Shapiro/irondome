@@ -1,5 +1,6 @@
-import { Coords } from "domain/types/coords";
 import { ExplodeElement } from "./explode.element";
+
+import type { Coords } from "type";
 
 export class ExplodeFactory {
     constructor(private readonly parent: HTMLDivElement) {}

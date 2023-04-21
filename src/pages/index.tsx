@@ -3,16 +3,17 @@ import { createRef, useEffect } from "react";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 
-import { MissileController } from "domain/buildings/missile/missile.controller";
+import {
+    ExplodeFactory,
+    HouseFactory,
+    MissileController,
+    MissileFactory,
+} from "buildings";
+
+import { HouseImageLevel } from "enum";
+import { km1200hour } from "mock";
 
 import styles from "styles/Home.module.css";
-
-import { HouseFactory } from "domain/buildings/house/house.factory";
-import { MissileFactory } from "domain/buildings/missile/missile.factory";
-import { km1200hour } from "domain/mocks/speed.mocks";
-import { ExplodeFactory } from "domain/buildings/explode/explode.factory";
-
-import { HouseImageLevel } from "domain/enums/images/house-image-levels";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,9 +41,9 @@ export default function Home() {
         );
 
         document.addEventListener("mousemove", async (e) => {
-            if(disabled) return;
+            if (disabled) return;
             disabled = true;
-            setTimeout(() => disabled = false, 500);
+            setTimeout(() => (disabled = false), 500);
 
             const missile1 = controller.create(km1200hour, {
                 x: window.innerWidth / 2,

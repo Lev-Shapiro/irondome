@@ -15,6 +15,14 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": "src",
+    "paths": {
+      "buildings": ["domain/buildings"],
+      "buildings/*": ["domain/buildings/*"],
+      "dto": ["domain/dto"],
+      "mock": ["domain/mock"],
+      "enum": ["domain/enum"],
+      "type": ["domain/type"],
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/hooks/useMissiles.ts"],
   "exclude": ["node_modules"]

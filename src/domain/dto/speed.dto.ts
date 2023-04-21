@@ -1,5 +1,4 @@
-import { DistanceUnit } from "../enums/units/distance-unit";
-import { TimeUnit } from "../enums/units/time-unit";
+import { DistanceUnit, TimeUnit } from "enum";
 
 export class SpeedDto {
     constructor(

@@ -1,4 +1,4 @@
-import { BuildingElement } from "../abstract/element.abstract";
+import { BuildingElement } from "buildings/building";
 
 export class MissileElement extends BuildingElement {
     rotate(deg: number) {

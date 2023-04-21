@@ -1,7 +1,8 @@
-import { Coords } from "domain/types/coords";
+import type { Coords } from "type";
 
-import { HouseImageLevel } from "domain/enums/images/house-image-levels";
-import { HouseFactory } from "./house.factory";
+import type { HouseImageLevel } from "enum";
+
+import type { HouseFactory } from "buildings/house";
 
 export class HouseController {
     constructor(private houseFactory: HouseFactory) {}

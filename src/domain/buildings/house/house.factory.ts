@@ -1,10 +1,8 @@
-import { HouseImageLevel } from "domain/enums/images/house-image-levels";
+import type { HouseImageLevel } from "enum";
 
-import { Coords } from "domain/types/coords";
+import type { Coords } from "type";
 
-import { HouseElement } from "./house.element";
-import { HouseEntity } from "./house.entity";
-import { HouseModel } from "./house.model";
+import { HouseElement, HouseEntity, HouseModel } from "buildings/house";
 
 export class HouseFactory {
     private height = 360;
