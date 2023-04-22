@@ -9,10 +9,13 @@ pnpm dev
 ```
 
 ## Ubiquitous language
-Object - threats, missiles, buildings
-MovingObject - threats, missiles
-NotMovingObject - buildings
-Effectors - video with animation of something, like: explosion, launch of rocket, etc...
+```Object``` - threats, missiles, buildings
+
+```MovingObject``` - threats, missiles
+
+```NotMovingObject``` - buildings
+
+```Effectors``` - video with animation of something, like: explosion, launch of rocket, etc...
 
 ## To Do
 
