@@ -72,12 +72,7 @@ export const Manager: FC<ManagerProps> = ({
     <ListGroup className={s.manager}>
       <ListGroupItem className={s.managerRow}>
         <Button onClick={zoomIn}>
-          <Image
-            src="/icons/zoom-in.svg"
-            width={16}
-            height={16}
-            alt="Zoom in"
-          />
+          <Image src="icons/zoom-in.svg" width={16} height={16} alt="Zoom in" />
         </Button>
         <div>
           <h5>Zooming</h5>
@@ -85,7 +80,7 @@ export const Manager: FC<ManagerProps> = ({
         </div>
         <Button onClick={zoomOut}>
           <Image
-            src="/icons/zoom-out.svg"
+            src="icons/zoom-out.svg"
             width={16}
             height={16}
             alt="Zoom in"

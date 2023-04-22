@@ -6,7 +6,7 @@ import { ExplodeElement } from './explode.element'
 
 export class ExplodeFactory extends BuildingFactory {
   build(coords: Coords) {
-    const video = this.createVideo(this.size, '/explosion.webm', true)
+    const video = this.createVideo(this.size, 'explosion.webm', true)
 
     const wrapper = this.wrap(video)
 
