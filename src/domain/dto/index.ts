@@ -1,3 +1,3 @@
-import { SpeedDto } from "./speed.dto";
+import { SpeedDto } from './speed.dto'
 
-export { SpeedDto };
+export { SpeedDto }

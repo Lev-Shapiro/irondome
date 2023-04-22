@@ -1,1 +1,1 @@
-export * from "./speed.mocks"
+export * from './speed.mocks'

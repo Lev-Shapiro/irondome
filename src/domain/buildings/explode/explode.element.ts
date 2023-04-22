@@ -1,13 +1,13 @@
 export class ExplodeElement {
-    private readonly time = 800;
+  private readonly time = 800
 
-    constructor(private readonly element: HTMLVideoElement) {}
+  constructor(private readonly element: HTMLVideoElement) {}
 
-    async wait() {
-        return new Promise(resolve => setTimeout(resolve, this.time));
-    }
+  async wait() {
+    return new Promise((resolve) => setTimeout(resolve, this.time))
+  }
 
-    remove() {
-        this.element.remove();
-    }
+  remove() {
+    this.element.remove()
+  }
 }

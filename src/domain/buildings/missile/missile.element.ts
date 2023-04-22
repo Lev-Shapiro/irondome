@@ -1,7 +1,7 @@
-import { BuildingElement } from "buildings/building";
+import { BuildingElement } from 'buildings/building'
 
 export class MissileElement extends BuildingElement {
-    rotate(deg: number) {
-        this.element.style.transform = `rotate(${deg}deg)`;
-    }
+  rotate(deg: number) {
+    this.element.style.transform = `rotate(${deg}deg)`
+  }
 }

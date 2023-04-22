@@ -1,41 +1,41 @@
-import type { HouseImageLevel } from "enum";
+import type { Coords } from 'type'
 
-import type { Coords } from "type";
+import type { HouseImageLevel } from 'enum'
 
-import { HouseElement, HouseEntity, HouseModel } from "buildings/house";
+import { HouseElement, HouseEntity, HouseModel } from 'buildings/house'
 
 export class HouseFactory {
-    private height = 360;
-    private width = 360;
+  private height = 360
+  private width = 360
 
-    constructor(private readonly parent: HTMLDivElement) {}
+  constructor(private readonly parent: HTMLDivElement) {}
 
-    build(imageLevel: HouseImageLevel, coords: Coords) {
-        const wrapper = document.createElement("div");
-        wrapper.className = "object";
+  build(imageLevel: HouseImageLevel, coords: Coords) {
+    const wrapper = document.createElement('div')
+    wrapper.className = 'object'
 
-        const image = document.createElement("img");
+    const image = document.createElement('img')
 
-        image.alt = "House";
+    image.alt = 'House'
 
-        image.src = imageLevel;
+    image.src = imageLevel
 
-        const element = new HouseElement(
-            wrapper,
-            image,
-            this.width / 8,
-            this.height / 8
-        );
+    const element = new HouseElement(
+      wrapper,
+      image,
+      this.width / 8,
+      this.height / 8
+    )
 
-        element.setCoords(coords);
+    element.setCoords(coords)
 
-        const entity = new HouseEntity();
+    const entity = new HouseEntity()
 
-        const model = new HouseModel(element, entity, coords);
+    const model = new HouseModel(element, entity, coords)
 
-        wrapper.appendChild(image);
-        this.parent.appendChild(wrapper);
+    wrapper.appendChild(image)
+    this.parent.appendChild(wrapper)
 
-        return model;
-    }
+    return model
+  }
 }

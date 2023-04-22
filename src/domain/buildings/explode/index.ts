@@ -1,2 +1,2 @@
-export { ExplodeFactory } from './explode.factory';
-export { ExplodeElement } from './explode.element';
+export { ExplodeFactory } from './explode.factory'
+export { ExplodeElement } from './explode.element'

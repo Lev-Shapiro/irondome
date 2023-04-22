@@ -1,38 +1,38 @@
-import { Coords } from "type";
+import { Coords } from 'type'
 
-import { BuildingModel } from "buildings/building";
-import { SpeedDto } from "dto";
+import { SpeedDto } from 'dto'
 
-import { ExplodeFactory } from "buildings/explode";
-import { MissileEntity, MissileFactory, MissileModel } from "buildings/missile";
+import { BuildingModel } from 'buildings/building'
+import { ExplodeFactory } from 'buildings/explode'
+import { MissileEntity, MissileFactory, MissileModel } from 'buildings/missile'
 
 export class MissileController {
-    constructor(
-        private missileFactory: MissileFactory,
-        private explodeFactory: ExplodeFactory
-    ) {}
+  constructor(
+    private missileFactory: MissileFactory,
+    private explodeFactory: ExplodeFactory
+  ) {}
 
-    create(speed: SpeedDto, coords: Coords) {
-        const element = this.missileFactory.build(coords);
+  create(speed: SpeedDto, coords: Coords) {
+    const element = this.missileFactory.build(coords)
 
-        const entity = new MissileEntity(speed);
+    const entity = new MissileEntity(speed)
 
-        const model = new MissileModel(element, entity, coords);
+    const model = new MissileModel(element, entity, coords)
 
-        return model;
-    }
+    return model
+  }
 
-    async launch(missile: MissileModel, target: Coords) {
-        await missile.launch(target);
-    }
+  async launch(missile: MissileModel, target: Coords) {
+    await missile.launch(target)
+  }
 
-    async explode(missile: MissileModel, target: BuildingModel) {
-        const explode = this.explodeFactory.build(target.coords);
+  async explode(missile: MissileModel, target: BuildingModel) {
+    const explode = this.explodeFactory.build(target.coords)
 
-        missile.remove();
-        target.remove();
+    missile.remove()
+    target.remove()
 
-        await explode.wait();
-        explode.remove();
-    }
+    await explode.wait()
+    explode.remove()
+  }
 }

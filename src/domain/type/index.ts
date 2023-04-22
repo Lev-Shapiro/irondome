@@ -1,1 +1,1 @@
-export type { Coords } from "./coords";
+export type { Coords } from './coords'
