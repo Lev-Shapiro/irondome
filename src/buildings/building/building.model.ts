@@ -1,4 +1,4 @@
-import { Coords } from 'domain/type/coords'
+import { Coords } from 'type/coords'
 
 import type { BuildingElement, BuildingEntity } from 'buildings/building'
 
