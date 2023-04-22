@@ -1,63 +1,61 @@
-import { MissileElement } from "./missile.element";
-import { MissileEntity } from "./missile.entity";
+import type { Coords } from 'type'
 
-import { Coords } from "domain/types/coords";
-
-import { BuildingModel } from "../abstract/model.abstract";
+import { BuildingModel } from 'buildings/building'
+import type { MissileElement, MissileEntity } from 'buildings/missile'
 
 export class MissileModel extends BuildingModel<MissileElement, MissileEntity> {
-    renderInterval = 40;
+  renderInterval = 40
 
-    rotate(to: Coords) {
-        const from = this.coords;
+  rotate(to: Coords) {
+    const from = this.coords
 
-        const coords =
-            (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 90;
+    const coords =
+      (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 90
 
-        this.element.rotate(coords);
-    }
+    this.element.rotate(coords)
+  }
 
-    launch(target: Coords) {
-        var { deltaX, deltaY, counter } = this.calculate(target);
+  launch(target: Coords) {
+    var { deltaX, deltaY, counter } = this.calculate(target)
 
-        this.rotate(target);
+    this.rotate(target)
 
-        return new Promise((resolve) => {
-            const launcher = setInterval(() => {
-                if (counter === 0) {
-                    clearInterval(launcher);
-                    resolve(undefined);
-                    return;
-                }
+    return new Promise((resolve) => {
+      const launcher = setInterval(() => {
+        if (counter === 0) {
+          clearInterval(launcher)
+          resolve(undefined)
+          return
+        }
 
-                this.setCoords({
-                    x: this.coords.x + deltaX,
-                    y: this.coords.y + deltaY,
-                });
+        this.setCoords({
+          x: this.coords.x + deltaX,
+          y: this.coords.y + deltaY,
+        })
 
-                counter--;
-            }, this.renderInterval);
-        });
-    }
+        counter--
+      }, this.renderInterval)
+    })
+  }
 
-    private calculate(target: Coords) {
-        const speed = this.entity.speed.pixelsPerMillisecond;
+  private calculate(target: Coords) {
+    const speed = this.entity.speed.pixelsPerMillisecond
 
-        const dx = target.x - this.coords.x,
-            dy = target.y - this.coords.y;
+    const dx = target.x - this.coords.x,
+      dy = target.y - this.coords.y
 
-        const distance = Math.sqrt(dx * dx + dy * dy);
+    const distance = Math.sqrt(dx * dx + dy * dy)
 
-        const deltaX = (dx / distance) * speed * this.renderInterval;
-        const deltaY = (dy / distance) * speed * this.renderInterval;
+    const deltaX = (dx / distance) * speed * this.renderInterval
+    const deltaY = (dy / distance) * speed * this.renderInterval
 
-        const counter = Math.round(dx / deltaX) || Math.round(dy / deltaY);
+    const counter = Math.round(dx / deltaX) || Math.round(dy / deltaY)
 
-        return { deltaX, deltaY, counter };
-    }
+    return { deltaX, deltaY, counter }
+  }
 
-    private setCoords(coords: Coords) {
-        this.element.setCoords(coords);
-        this.coords = {...coords};
-    }
+  private setCoords(coords: Coords) {
+    this.element.setCoords(coords)
+    this.coords = { ...coords }
+  }
 }

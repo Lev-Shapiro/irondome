@@ -1,5 +1,5 @@
-import { SpeedDto } from "domain/dtos/speed.dto";
+import { SpeedDto } from 'dto'
 
 export class MissileEntity {
-    constructor(public readonly speed: SpeedDto) {}
+  constructor(public readonly speed: SpeedDto) {}
 }

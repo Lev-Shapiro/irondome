@@ -1,5 +1,4 @@
-import { BuildingModel } from "../abstract/model.abstract";
-import { HouseElement } from "./house.element";
-import { HouseEntity } from "./house.entity";
+import { BuildingModel } from 'buildings/building'
+import type { HouseElement, HouseEntity } from 'buildings/house'
 
 export class HouseModel extends BuildingModel<HouseElement, HouseEntity> {}
