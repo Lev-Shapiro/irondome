@@ -1,0 +1,31 @@
+.manager {
+  width: 30%;
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2%;
+}
+
+.managerRow {
+  padding-top: 3%;
+  padding-bottom: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.managerRow > div {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+}
+
+.formSection {
+  padding: 3%;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}

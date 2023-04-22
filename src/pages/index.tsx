@@ -1,65 +1,67 @@
-import { createRef, useEffect } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Manager } from 'components/Manager/Manager'
+import { getMissileService } from 'scripts/getMissileService'
+
+import { createRef, useEffect, useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 
-import { HouseImageLevel } from 'enum'
-
-import { km1200hour } from 'mock'
-
-import {
-  ExplodeFactory,
-  HouseFactory,
-  MissileController,
-  MissileFactory,
-} from 'buildings'
+import { SpeedDto } from 'dto'
 
 const inter = Inter({ subsets: ['latin'] })
 
+var disabled = false
+
 export default function Home() {
+  const [zoom, setZoom] = useState(1)
+
+  const [time, setTime] = useState(1)
+  const [timeAmount, setTimeAmount] = useState(1)
+
+  const [distance, setDistance] = useState(1)
+  const [distanceAmount, setDistanceAmount] = useState(1)
+
+  const speed = new SpeedDto(timeAmount, time, distanceAmount, distance)
+
+  const playgroundRef = createRef<HTMLDivElement>()
   const explosionRef = createRef<HTMLDivElement>()
   const houseRef = createRef<HTMLDivElement>()
   const missilesRef = createRef<HTMLDivElement>()
 
   useEffect(() => {
-    var disabled = false
-
+    const playground = playgroundRef.current
     const explosion = explosionRef.current
     const missiles = missilesRef.current
     const house = houseRef.current
-    if (!explosion || !missiles || !house) return
+    if (!playground || !explosion || !missiles || !house) return
 
-    const houseFactory = new HouseFactory(house)
+    const service = getMissileService(zoom, explosion, missiles)
 
-    const explodesFactory = new ExplodeFactory(explosion)
-    const missileFactory = new MissileFactory(missiles)
-
-    const controller = new MissileController(missileFactory, explodesFactory)
-
-    document.addEventListener('mousemove', async (e) => {
+    const shoot = async (e: MouseEvent) => {
       if (disabled) return
       disabled = true
-      setTimeout(() => (disabled = false), 500)
+      setTimeout(() => (disabled = false), 200)
 
-      const missile1 = controller.create(km1200hour, {
-        x: window.innerWidth / 2,
-        y: window.innerHeight / 2,
+      const missile = service.create(speed.pixelsPerMillisecond * zoom, {
+        x: window.innerWidth - playground.offsetWidth / 2,
+        y: window.innerHeight - playground.offsetHeight / 2,
       })
 
-      // const missile2 = controller.create(km1200hour, {
-      //     x: e.clientX,
-      //     y: e.clientY,
-      // });
-
-      const myHouse = houseFactory.build(HouseImageLevel.lvl1, {
+      const target = {
         x: e.clientX,
         y: e.clientY,
-      })
+      }
 
-      await controller.launch(missile1, myHouse.coords)
-      await controller.explode(missile1, myHouse)
-    })
-  }, [explosionRef, houseRef, missilesRef])
+      await service.launch(missile, target)
+      await service.explode(missile, target)
+    }
+
+    playground.addEventListener('mousemove', shoot)
+
+    return () => playground.removeEventListener('mousemove', shoot)
+  })
 
   return (
     <>
@@ -70,10 +72,28 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <div id="missiles" ref={missilesRef}></div>
-        <div id="houses" ref={houseRef}></div>
-        <div id="explodes" ref={explosionRef}></div>
+      <main style={{ height: '100vh' }}>
+        <Container fluid className="h-100">
+          <Row className="h-100">
+            <Manager
+              pxPerMs={speed.pixelsPerMillisecond}
+              timeAmount={timeAmount}
+              distanceAmount={distanceAmount}
+              zoom={zoom}
+              setZoom={setZoom}
+              setTime={setTime}
+              setTimeAmount={setTimeAmount}
+              setDistance={setDistance}
+              setDistanceAmount={setDistanceAmount}
+            />
+
+            <Col id="playground" ref={playgroundRef}>
+              <div id="missiles" ref={missilesRef}></div>
+              <div id="houses" ref={houseRef}></div>
+              <div id="explodes" ref={explosionRef}></div>
+            </Col>
+          </Row>
+        </Container>
       </main>
     </>
   )

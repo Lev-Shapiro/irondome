@@ -4,10 +4,26 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow: hidden;
+}
+
 .object {
   position: absolute;
 }
 
 .object.explode {
   transform: translate(-50%, -50%);
+}
+
+.exhaustFlame {
+  position: absolute;
+  bottom: 0;
+  transform: rotate(-180deg) translate(-50%, -100%);
+
+  display: none;
+}
+
+.exhaustFlame.active {
+  display: block;
 }
