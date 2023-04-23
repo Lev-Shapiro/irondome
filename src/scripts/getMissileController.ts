@@ -2,7 +2,8 @@ import { MissileController } from 'controller'
 
 import { Size } from 'type'
 
-import { ExplodeFactory, MissileFactory } from 'objects'
+import { MissileFactory } from 'objects/buildings'
+import { ExplodeFactory } from 'objects/effectors'
 
 export const getMissileController = (
   zoom: number,

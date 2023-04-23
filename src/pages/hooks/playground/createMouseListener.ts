@@ -2,7 +2,7 @@ import { MissileController } from 'controller'
 
 import { Coords } from 'type'
 
-import { MissileModel } from 'objects'
+import { MissileModel } from 'objects/buildings'
 
 var disabled = false
 

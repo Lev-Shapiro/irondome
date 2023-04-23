@@ -1,4 +1,4 @@
-import { BuildingElement } from 'objects'
+import { BuildingElement } from 'objects/buildings'
 
 export class ExplodeElement extends BuildingElement {
   private readonly time = 800
