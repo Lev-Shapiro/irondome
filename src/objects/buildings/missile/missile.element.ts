@@ -1,6 +1,6 @@
 import { Size } from 'type'
 
-import { BuildingElement } from 'objects'
+import { BuildingElement } from 'objects/buildings'
 
 export class MissileElement extends BuildingElement {
   constructor(

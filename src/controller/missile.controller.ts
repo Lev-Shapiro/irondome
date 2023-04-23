@@ -2,11 +2,11 @@ import { Coords } from 'type'
 
 import {
   BuildingModel,
-  ExplodeFactory,
   MissileEntity,
   MissileFactory,
   MissileModel,
-} from 'objects'
+} from 'objects/buildings'
+import { ExplodeFactory } from 'objects/effectors'
 
 export class MissileController {
   constructor(

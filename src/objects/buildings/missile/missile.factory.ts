@@ -1,6 +1,6 @@
 import type { Coords } from 'type'
 
-import { BuildingFactory, MissileElement } from 'objects'
+import { BuildingFactory, MissileElement } from 'objects/buildings'
 
 export class MissileFactory extends BuildingFactory {
   build(coords: Coords) {
