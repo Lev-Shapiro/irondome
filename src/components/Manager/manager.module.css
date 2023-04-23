@@ -6,7 +6,9 @@
 
   display: flex;
   flex-direction: column;
-  gap: 2%;
+  row-gap: 2%;
+
+  padding-right: 0 !important;
 }
 
 .managerRow {

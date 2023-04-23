@@ -1,6 +1,6 @@
 import { Coords } from 'type/coords'
 
-import type { BuildingElement, BuildingEntity } from 'buildings/building'
+import type { BuildingElement, BuildingEntity } from 'objects'
 
 export abstract class BuildingModel<
   Element extends BuildingElement = BuildingElement,
