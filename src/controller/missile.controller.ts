@@ -1,7 +1,5 @@
 import { Coords } from 'type'
 
-import { SpeedDto } from 'dto'
-
 import {
   ExplodeFactory,
   MissileEntity,
@@ -10,7 +8,7 @@ import {
 } from 'buildings'
 import { BuildingModel } from 'buildings/building'
 
-export class MissileService {
+export class MissileController {
   constructor(
     private missileFactory: MissileFactory,
     private explodeFactory: ExplodeFactory

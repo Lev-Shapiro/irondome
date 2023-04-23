@@ -1,10 +1,10 @@
-import { MissileService } from 'services'
+import { MissileController } from 'controller'
 
 import { Size } from 'type'
 
 import { ExplodeFactory, MissileFactory } from 'buildings'
 
-export const getMissileService = (
+export const getMissileController = (
   zoom: number,
   explosion: HTMLDivElement,
   missiles: HTMLDivElement
@@ -22,7 +22,7 @@ export const getMissileService = (
   const explodesFactory = new ExplodeFactory(explosion, explosionSizes)
   const missileFactory = new MissileFactory(missiles, missileSizes)
 
-  const service = new MissileService(missileFactory, explodesFactory)
+  const controller = new MissileController(missileFactory, explodesFactory)
 
-  return service
+  return controller
 }

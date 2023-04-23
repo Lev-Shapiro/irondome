@@ -8,10 +8,11 @@
     "react",
     "next",
     "type",
-    "dto",
     "enum",
     "mock",
+    "scripts",
     "buildings",
+    "components",
     "^[./*]"
   ],
   "importOrderSeparation": true,
