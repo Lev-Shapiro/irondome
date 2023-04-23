@@ -1,73 +1,47 @@
-import { getEnumKeys } from 'scripts/getEnumKeys'
-
-import { ChangeEventHandler, Dispatch, FC, SetStateAction } from 'react'
+import { ChangeEventHandler, FC } from 'react'
 import { Button, Form, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 import Image from 'next/image'
 
 import { DistanceUnit, TimeUnit } from 'enum'
 
+import { getEnumKeys } from 'scripts/getEnumKeys'
+
 import s from './manager.module.css'
 
 interface ManagerProps {
   pxPerMs: number
-  setTime: Dispatch<SetStateAction<number>>
-
-  timeAmount: number
-  setTimeAmount: Dispatch<SetStateAction<number>>
-
-  setDistance: Dispatch<SetStateAction<number>>
-
-  distanceAmount: number
-  setDistanceAmount: Dispatch<SetStateAction<number>>
 
   zoom: number
-  setZoom: Dispatch<SetStateAction<number>>
+  zoomIn: () => void
+  zoomOut: () => void
+
+  time: number
+  timeAmount: number
+  selectTimeUnit: ChangeEventHandler<HTMLSelectElement>
+  chooseTimeAmount: ChangeEventHandler<HTMLInputElement>
+
+  distance: number
+  distanceAmount: number
+  selectDistanceUnit: ChangeEventHandler<HTMLSelectElement>
+  chooseDistanceAmount: ChangeEventHandler<HTMLInputElement>
 }
 
 export const Manager: FC<ManagerProps> = ({
-  zoom,
-  setZoom,
   pxPerMs,
+
+  zoom,
+  zoomIn,
+  zoomOut,
+
   timeAmount,
-  setTime,
+  selectTimeUnit,
+  chooseTimeAmount,
+
   distanceAmount,
-  setDistanceAmount,
-  setDistance,
-  setTimeAmount,
+  selectDistanceUnit,
+  chooseDistanceAmount,
 }) => {
-  const zoomIn = () => {
-    if (zoom <= 2.4) {
-      setZoom((zoom) => zoom + 0.2)
-    }
-  }
-
-  const zoomOut = () => {
-    if (zoom > 0.4) {
-      setZoom((zoom) => zoom - 0.2)
-    }
-  }
-
-  const selectTimeUnit: ChangeEventHandler<HTMLSelectElement> = (select) => {
-    setTime(parseInt(select.target.value))
-  }
-
-  const chooseTimeAmount: ChangeEventHandler<HTMLInputElement> = (input) => {
-    setTimeAmount(parseInt(input.target.value))
-  }
-
-  const selectDistanceUnit: ChangeEventHandler<HTMLSelectElement> = (
-    select
-  ) => {
-    setDistance(Number(select.target.value))
-  }
-
-  const chooseDistanceAmount: ChangeEventHandler<HTMLInputElement> = (
-    select
-  ) => {
-    setDistanceAmount(Number(select.target.value))
-  }
-
   return (
     <ListGroup className={s.manager}>
       <ListGroupItem className={s.managerRow}>
@@ -95,7 +69,12 @@ export const Manager: FC<ManagerProps> = ({
           <div className={s.formSection}>
             <span>{timeAmount}</span>
             <div style={{ display: 'flex' }}>
-              <Form.Range min={1} max={100} onChange={chooseTimeAmount} />
+              <Form.Range
+                min={1}
+                max={100}
+                defaultValue={1}
+                onChange={chooseTimeAmount}
+              />
             </div>
             <Form.Select aria-label="Select time" onChange={selectTimeUnit}>
               {getEnumKeys(TimeUnit).map((unit) => (
@@ -109,7 +88,12 @@ export const Manager: FC<ManagerProps> = ({
           <div className={s.formSection}>
             <span>{distanceAmount}</span>
             <div style={{ display: 'flex' }}>
-              <Form.Range min={1} max={5000} onChange={chooseDistanceAmount} />
+              <Form.Range
+                min={1}
+                max={5000}
+                defaultValue={1}
+                onChange={chooseDistanceAmount}
+              />
             </div>
             <Form.Select aria-label="Select time" onChange={selectDistanceUnit}>
               {getEnumKeys(DistanceUnit).map((unit) => (

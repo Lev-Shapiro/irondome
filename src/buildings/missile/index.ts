@@ -3,9 +3,4 @@ import { MissileEntity } from './missile.entity'
 import { MissileFactory } from './missile.factory'
 import { MissileModel } from './missile.model'
 
-export {
-  MissileElement,
-  MissileEntity,
-  MissileFactory,
-  MissileModel,
-}
+export { MissileElement, MissileEntity, MissileFactory, MissileModel }
