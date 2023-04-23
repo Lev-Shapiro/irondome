@@ -2,8 +2,7 @@ import type { Coords } from 'type'
 
 import type { HouseImageLevel } from 'enum'
 
-import { BuildingFactory } from 'buildings/building'
-import { HouseElement } from 'buildings/house'
+import { BuildingFactory, HouseElement } from 'objects'
 
 export class HouseFactory extends BuildingFactory {
   build(coords: Coords, imageLevel: HouseImageLevel) {

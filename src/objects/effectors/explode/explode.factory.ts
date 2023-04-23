@@ -1,6 +1,6 @@
 import type { Coords } from 'type'
 
-import { BuildingFactory } from 'buildings/building'
+import { BuildingFactory } from 'objects'
 
 import { ExplodeElement } from './explode.element'
 

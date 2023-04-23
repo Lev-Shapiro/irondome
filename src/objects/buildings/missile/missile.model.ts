@@ -1,7 +1,6 @@
 import type { Coords } from 'type'
 
-import { BuildingModel } from 'buildings/building'
-import type { MissileElement, MissileEntity } from 'buildings/missile'
+import { BuildingModel, MissileElement, MissileEntity } from 'objects'
 
 export class MissileModel extends BuildingModel<MissileElement, MissileEntity> {
   renderInterval = 20
