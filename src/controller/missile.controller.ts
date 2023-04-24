@@ -1,5 +1,7 @@
 import { Coords } from 'type'
 
+import { MissileType } from 'enum'
+
 import {
   BuildingModel,
   MissileEntity,
@@ -14,11 +16,10 @@ export class MissileController {
     private explodeFactory: ExplodeFactory
   ) {}
 
-  create(speed: number, coords: Coords) {
+  create(speed: number, coords: Coords): MissileModel {
     const element = this.missileFactory.build(coords)
 
-    const entity = new MissileEntity(speed)
-
+    const entity = new MissileEntity(MissileType.Falcon9, speed)
     const model = new MissileModel(element, entity, coords)
 
     return model

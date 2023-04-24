@@ -3,6 +3,8 @@ import { Button, Form, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 import Image from 'next/image'
 
+import { SavedMissile } from 'dto'
+
 import { DistanceUnit, TimeUnit } from 'enum'
 
 import { getEnumKeys } from 'scripts/getEnumKeys'
@@ -25,6 +27,8 @@ interface ManagerProps {
   distanceAmount: number
   selectDistanceUnit: ChangeEventHandler<HTMLSelectElement>
   chooseDistanceAmount: ChangeEventHandler<HTMLInputElement>
+
+  missiles: SavedMissile[]
 }
 
 export const Manager: FC<ManagerProps> = ({
@@ -41,6 +45,8 @@ export const Manager: FC<ManagerProps> = ({
   distanceAmount,
   selectDistanceUnit,
   chooseDistanceAmount,
+
+  missiles,
 }) => {
   return (
     <ListGroup className={s.manager}>
@@ -103,6 +109,54 @@ export const Manager: FC<ManagerProps> = ({
               ))}
             </Form.Select>
           </div>
+        </div>
+      </ListGroupItem>
+
+      <ListGroupItem className={s.managerRow}>
+        <div>
+          <h5>All Missiles</h5>
+
+          {missiles.length ? (
+            <ListGroup className="gap-3">
+              {missiles.map((missile) => {
+                const time = missile.missile.estimatedTime?.convertToOptimal()
+
+                return (
+                  <ListGroupItem className={s.missileData} key={missile.id}>
+                    <div className={s.missileDataBadge}>
+                      <span>{missile.missile.entity.type}</span>
+
+                      <Image
+                        width={20}
+                        height={20}
+                        src="/icons/hashtag.svg"
+                        alt="number icon"
+                      />
+                      <span>{missile.id}</span>
+                    </div>
+                    <div
+                      className={'badge text-secondary ' + s.missileDataBadge}
+                    >
+                      <Image
+                        width={20}
+                        height={20}
+                        src="/icons/timer.svg"
+                        alt="time icon"
+                        style={{
+                          paddingLeft: '0.5rem',
+                        }}
+                      />
+                      <span>
+                        {time?.amount} {time?.unit}
+                      </span>
+                    </div>
+                  </ListGroupItem>
+                )
+              })}
+            </ListGroup>
+          ) : (
+            <span className="text-secondary">Missiles not found</span>
+          )}
         </div>
       </ListGroupItem>
     </ListGroup>

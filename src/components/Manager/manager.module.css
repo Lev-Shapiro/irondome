@@ -9,6 +9,9 @@
   row-gap: 2%;
 
   padding-right: 0 !important;
+
+  overflow: auto;
+  resize: horizontal;
 }
 
 .managerRow {
@@ -30,4 +33,19 @@
   padding: 3%;
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
+}
+
+.missileData {
+  border-radius: 5px !important;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.missileDataBadge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
