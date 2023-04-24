@@ -157,7 +157,7 @@ export const Manager: FC<ManagerProps> = ({
                       <Image
                         width={20}
                         height={20}
-                        src="/icons/hashtag.svg"
+                        src="icons/hashtag.svg"
                         alt="number icon"
                       />
                       <span>{movingObject.id}</span>
@@ -168,7 +168,7 @@ export const Manager: FC<ManagerProps> = ({
                       <Image
                         width={20}
                         height={20}
-                        src="/icons/timer.svg"
+                        src="icons/timer.svg"
                         alt="time icon"
                         style={{
                           paddingLeft: '0.5rem',
