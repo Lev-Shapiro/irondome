@@ -12,9 +12,9 @@ import { MovingObjectType } from 'enum'
 
 import { Manager } from 'components/Manager/Manager'
 
-import { useManager } from './hooks/manager/useManager'
-import { usePlayground } from './hooks/playground/usePlayground'
-import { useMissileRepository } from './hooks/useMissileRepository'
+import { useManager } from '../../hooks/manager/useManager'
+import { usePlayground } from '../../hooks/playground/usePlayground'
+import { useMissileRepository } from '../../hooks/useMissileRepository'
 
 const inter = Inter({ subsets: ['latin'] })
 
