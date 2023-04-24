@@ -1,6 +1,6 @@
 import { Coords, Size } from 'type'
 
-export abstract class BuildingElement {
+export abstract class ObjectElement {
   constructor(
     public readonly wrapper: HTMLDivElement,
     public readonly element: HTMLImageElement | HTMLVideoElement,

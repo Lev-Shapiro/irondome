@@ -1,3 +1,3 @@
-import { BuildingElement } from 'objects/buildings'
+import { ObjectElement } from 'objects/object'
 
-export class HouseElement extends BuildingElement {}
+export class HouseElement extends ObjectElement {}

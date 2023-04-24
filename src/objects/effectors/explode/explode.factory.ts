@@ -1,10 +1,10 @@
 import type { Coords } from 'type'
 
-import { BuildingFactory } from 'objects/buildings'
+import { ObjectFactory } from 'objects/object'
 
 import { ExplodeElement } from './explode.element'
 
-export class ExplodeFactory extends BuildingFactory {
+export class ExplodeFactory extends ObjectFactory {
   build(coords: Coords) {
     const video = this.createVideo(this.size, 'explosion.webm', true)
 

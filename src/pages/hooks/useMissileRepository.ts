@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useMemo } from 'react'
 
 import { SavedMissile } from 'dto'
 
-import { MissileModel } from 'objects/buildings'
+import { MissileModel } from 'objects/movingObject'
 
 import { MissileRepository } from 'repository'
 

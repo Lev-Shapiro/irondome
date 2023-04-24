@@ -1,8 +1,10 @@
 import type { Coords } from 'type'
 
-import { BuildingFactory, MissileElement } from 'objects/buildings'
+import { ObjectFactory } from 'objects/object'
 
-export class MissileFactory extends BuildingFactory {
+import { MissileElement } from '.'
+
+export class MissileFactory extends ObjectFactory {
   build(coords: Coords) {
     const missileImage = this.createImage(this.size, 'missile.webp')
     const missileFireImage = this.createImage(

@@ -1,7 +1,7 @@
 import { Size } from 'type'
 
-import { MissileFactory } from 'objects/buildings'
 import { ExplodeFactory } from 'objects/effectors'
+import { MissileFactory } from 'objects/movingObject'
 
 import { MissileController } from 'controller'
 

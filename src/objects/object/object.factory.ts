@@ -1,8 +1,8 @@
 import { Coords, Size } from 'type'
 
-import { BuildingElement } from './building.element'
+import { ObjectElement } from './object.element'
 
-export abstract class BuildingFactory {
+export abstract class ObjectFactory {
   constructor(
     public readonly parent: HTMLDivElement,
     public readonly size: Size
@@ -52,5 +52,5 @@ export abstract class BuildingFactory {
     return parent
   }
 
-  abstract build(coords: Coords, ...props: any[]): BuildingElement
+  abstract build(coords: Coords, ...props: any[]): ObjectElement
 }

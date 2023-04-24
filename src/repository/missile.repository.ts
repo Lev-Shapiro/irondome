@@ -2,7 +2,7 @@ import { Missiles } from 'type/missile'
 
 import { SavedMissile } from 'dto'
 
-import { MissileModel } from 'objects/buildings'
+import { MissileModel } from 'objects/movingObject'
 
 export class MissileRepository {
   private newId = 0

@@ -1,4 +1,4 @@
-import { MissileModel } from 'objects/buildings'
+import { MissileModel } from 'objects/movingObject'
 
 export class SavedMissile {
   constructor(
