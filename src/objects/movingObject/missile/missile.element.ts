@@ -1,8 +1,8 @@
 import { Size } from 'type'
 
-import { BuildingElement } from 'objects/buildings'
+import { ObjectElement } from 'objects/object'
 
-export class MissileElement extends BuildingElement {
+export class MissileElement extends ObjectElement {
   constructor(
     wrapper: HTMLDivElement,
     element: HTMLImageElement,

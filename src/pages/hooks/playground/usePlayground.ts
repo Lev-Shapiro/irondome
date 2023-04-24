@@ -6,7 +6,7 @@ import { SavedMissile } from 'dto'
 
 import { getMissileController } from 'scripts/getMissileController'
 
-import { MissileModel } from 'objects/buildings'
+import { MissileModel } from 'objects/movingObject'
 
 import { createMouseListener } from './createMouseListener'
 

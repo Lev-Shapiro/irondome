@@ -4,9 +4,11 @@ import { TimeConverter } from 'dto/time-converter'
 
 import { TimeUnit } from 'enum'
 
-import { BuildingModel, MissileElement, MissileEntity } from 'objects/buildings'
+import { ObjectModel } from 'objects/object'
 
-export class MissileModel extends BuildingModel<MissileElement, MissileEntity> {
+import { MissileElement, MissileEntity } from '.'
+
+export class MissileModel extends ObjectModel<MissileElement, MissileEntity> {
   private counter: number | undefined
 
   renderInterval = 20

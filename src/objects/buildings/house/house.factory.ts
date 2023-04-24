@@ -2,9 +2,11 @@ import type { Coords } from 'type'
 
 import type { HouseImageLevel } from 'enum'
 
-import { BuildingFactory, HouseElement } from 'objects/buildings'
+import { ObjectFactory } from 'objects/object'
 
-export class HouseFactory extends BuildingFactory {
+import { HouseElement } from '.'
+
+export class HouseFactory extends ObjectFactory {
   build(coords: Coords, imageLevel: HouseImageLevel) {
     const image = this.createImage(this.size, imageLevel)
     image.alt = 'House'
