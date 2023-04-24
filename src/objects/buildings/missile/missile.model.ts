@@ -1,9 +1,26 @@
 import type { Coords } from 'type'
 
+import { TimeConverter } from 'dto/time-converter'
+
+import { TimeUnit } from 'enum'
+
 import { BuildingModel, MissileElement, MissileEntity } from 'objects/buildings'
 
 export class MissileModel extends BuildingModel<MissileElement, MissileEntity> {
+  private counter: number | undefined
+
   renderInterval = 20
+
+  get estimatedTime() {
+    if (!this.counter) return undefined
+
+    const time = new TimeConverter(
+      this.counter * this.renderInterval,
+      TimeUnit.Millisecond
+    )
+
+    return time
+  }
 
   rotate(to: Coords) {
     const from = this.coords
@@ -16,6 +33,8 @@ export class MissileModel extends BuildingModel<MissileElement, MissileEntity> {
 
   launch(target: Coords) {
     var { deltaX, deltaY, counter } = this.calculate(target)
+
+    this.counter = counter
 
     this.rotate(target)
     this.element.launch()
