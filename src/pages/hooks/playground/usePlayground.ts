@@ -2,19 +2,22 @@ import { createRef, useEffect } from 'react'
 
 import { Coords } from 'type'
 
-import { SavedMissile } from 'dto'
+import { SavedMovingObject } from 'dto'
 
-import { getMissileController } from 'scripts/getMissileController'
+import { MovingObjectType } from 'enum'
 
-import { MissileModel } from 'objects/movingObject'
+import { getController } from 'scripts/getController'
+
+import { MovingObjectModel } from 'objects/movingObject/movingObject'
 
 import { createMouseListener } from './createMouseListener'
 
 export const usePlayground = (
   speed: number,
   zoom: number,
+  movingObjectType: MovingObjectType,
 
-  add: (missile: MissileModel) => SavedMissile,
+  add: (movingObject: MovingObjectModel) => SavedMovingObject,
   remove: (id: number) => void
 ) => {
   const playgroundRef = createRef<HTMLDivElement>()
@@ -29,7 +32,12 @@ export const usePlayground = (
 
     if (!playground || !explosion || !missiles) return
 
-    const controller = getMissileController(zoom, explosion, missiles)
+    const controller = getController(
+      zoom,
+      explosion,
+      missiles,
+      movingObjectType
+    )
 
     const createMissile = (coords: Coords) => {
       const model = controller.create(speed * zoom, coords)

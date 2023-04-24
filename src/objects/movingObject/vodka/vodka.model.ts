@@ -1,19 +1,16 @@
 import type { Coords } from 'type'
 
-import { MissileElement, MissileEntity } from '.'
+import { VodkaElement, VodkaEntity } from '.'
 import { MovingObjectModel } from '../movingObject'
 
-export class MissileModel extends MovingObjectModel<
-  MissileElement,
-  MissileEntity
-> {
+export class VodkaModel extends MovingObjectModel<VodkaElement, VodkaEntity> {
   renderInterval = 20
 
   rotate(to: Coords) {
     const from = this.coords
 
     const coords =
-      (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 90
+      (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 270
 
     this.element.rotate(coords)
   }
@@ -24,7 +21,6 @@ export class MissileModel extends MovingObjectModel<
     this.counter = counter
 
     this.rotate(target)
-    this.element.launch()
 
     return new Promise((resolve) => {
       const launcher = setInterval(() => {

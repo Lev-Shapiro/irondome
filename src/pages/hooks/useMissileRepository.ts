@@ -1,21 +1,21 @@
 import { Dispatch, SetStateAction, useMemo } from 'react'
 
-import { SavedMissile } from 'dto'
+import { SavedMovingObject } from 'dto'
 
-import { MissileModel } from 'objects/movingObject'
+import { MovingObjectModel } from 'objects/movingObject/movingObject'
 
-import { MissileRepository } from 'repository'
+import { MovingObjectsRepository } from 'repository'
 
 export const useMissileRepository = (
-  setMissiles: Dispatch<SetStateAction<SavedMissile[]>>
+  setMissiles: Dispatch<SetStateAction<SavedMovingObject[]>>
 ) => {
-  const missileRepository = useMemo(() => new MissileRepository(), [])
+  const missileRepository = useMemo(() => new MovingObjectsRepository(), [])
 
-  const add = (missile: MissileModel) => {
-    const savedMissile = missileRepository.add(missile)
-    setMissiles((missiles) => [...missiles, savedMissile])
+  const add = (movingObject: MovingObjectModel) => {
+    const savedMovingObject = missileRepository.add(movingObject)
+    setMissiles((movingObjects) => [...movingObjects, savedMovingObject])
 
-    return savedMissile
+    return savedMovingObject
   }
 
   const remove = (id: number) => {

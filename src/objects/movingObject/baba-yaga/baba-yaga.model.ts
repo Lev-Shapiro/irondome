@@ -1,11 +1,11 @@
 import type { Coords } from 'type'
 
-import { MissileElement, MissileEntity } from '.'
+import { BabaYagaElement, BabaYagaEntity } from '.'
 import { MovingObjectModel } from '../movingObject'
 
-export class MissileModel extends MovingObjectModel<
-  MissileElement,
-  MissileEntity
+export class BabaYagaModel extends MovingObjectModel<
+  BabaYagaElement,
+  BabaYagaEntity
 > {
   renderInterval = 20
 
@@ -13,7 +13,7 @@ export class MissileModel extends MovingObjectModel<
     const from = this.coords
 
     const coords =
-      (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 90
+      (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 182.5
 
     this.element.rotate(coords)
   }
