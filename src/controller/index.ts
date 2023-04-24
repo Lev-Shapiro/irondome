@@ -1,1 +1,1 @@
-export { MissileController } from './missile.controller'
+export * from './movingObject'

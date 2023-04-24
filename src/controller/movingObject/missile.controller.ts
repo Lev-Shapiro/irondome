@@ -1,8 +1,5 @@
 import { Coords } from 'type'
 
-import { MissileType } from 'enum'
-
-import { ExplodeFactory } from 'objects/effectors'
 import {
   MissileEntity,
   MissileFactory,
@@ -10,16 +7,16 @@ import {
 } from 'objects/movingObject'
 import { ObjectModel } from 'objects/object'
 
-export class MissileController {
-  constructor(
-    private missileFactory: MissileFactory,
-    private explodeFactory: ExplodeFactory
-  ) {}
+import { MovingObjectController } from './moving-object.controller'
 
+export class MissileController extends MovingObjectController<
+  MissileFactory,
+  MissileModel
+> {
   create(speed: number, coords: Coords): MissileModel {
-    const element = this.missileFactory.build(coords)
+    const element = this.factory.build(coords)
 
-    const entity = new MissileEntity(MissileType.Falcon9, speed)
+    const entity = new MissileEntity('Falcon 9', speed)
     const model = new MissileModel(element, entity, coords)
 
     return model

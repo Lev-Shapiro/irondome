@@ -6,7 +6,9 @@ import { Col, Container, Row } from 'react-bootstrap'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 
-import { SavedMissile } from 'dto'
+import { SavedMovingObject } from 'dto'
+
+import { MovingObjectType } from 'enum'
 
 import { Manager } from 'components/Manager/Manager'
 
@@ -17,7 +19,15 @@ import { useMissileRepository } from './hooks/useMissileRepository'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const [missiles, setMissiles] = useState<SavedMissile[]>([])
+  const [movingObjectType, setMovingObjectType] = useState<MovingObjectType>(
+    MovingObjectType.Missile
+  )
+
+  const updateMovingObjectType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setMovingObjectType(e.target.value as MovingObjectType)
+  }
+
+  const [movingObjects, setMovingObjects] = useState<SavedMovingObject[]>([])
 
   // const missileRepository = new MissileRepository()
 
@@ -33,7 +43,8 @@ export default function Home() {
   //   missileRepository.remove(id)
   // }
 
-  const { missileRepository, add, remove } = useMissileRepository(setMissiles)
+  const { missileRepository, add, remove } =
+    useMissileRepository(setMovingObjects)
 
   const managers = useManager()
 
@@ -44,6 +55,9 @@ export default function Home() {
   const { playgroundRef, explosionRef, houseRef, missilesRef } = usePlayground(
     speed,
     zoom,
+
+    movingObjectType,
+
     add,
     remove
   )
@@ -60,7 +74,13 @@ export default function Home() {
       <main style={{ height: '100vh' }}>
         <Container fluid className="h-100">
           <Row className="h-100">
-            <Manager missiles={missiles} pxPerMs={speed} {...managers} />
+            <Manager
+              movingObjectType={movingObjectType}
+              updateMovingObjectType={updateMovingObjectType}
+              movingObjects={movingObjects}
+              pxPerMs={speed}
+              {...managers}
+            />
 
             <Col id="playground" ref={playgroundRef}>
               <div id="missiles" ref={missilesRef}></div>

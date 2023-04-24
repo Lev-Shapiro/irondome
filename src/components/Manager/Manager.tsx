@@ -3,9 +3,9 @@ import { Button, Form, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 import Image from 'next/image'
 
-import { SavedMissile } from 'dto'
+import { SavedMovingObject } from 'dto'
 
-import { DistanceUnit, TimeUnit } from 'enum'
+import { DistanceUnit, MovingObjectType, TimeUnit } from 'enum'
 
 import { getEnumKeys } from 'scripts/getEnumKeys'
 
@@ -28,7 +28,10 @@ interface ManagerProps {
   selectDistanceUnit: ChangeEventHandler<HTMLSelectElement>
   chooseDistanceAmount: ChangeEventHandler<HTMLInputElement>
 
-  missiles: SavedMissile[]
+  movingObjects: SavedMovingObject[]
+
+  movingObjectType: MovingObjectType
+  updateMovingObjectType: ChangeEventHandler<HTMLSelectElement>
 }
 
 export const Manager: FC<ManagerProps> = ({
@@ -46,10 +49,31 @@ export const Manager: FC<ManagerProps> = ({
   selectDistanceUnit,
   chooseDistanceAmount,
 
-  missiles,
+  movingObjects,
+
+  movingObjectType,
+  updateMovingObjectType,
 }) => {
   return (
     <ListGroup className={s.manager}>
+      <ListGroupItem className={s.managerRow}>
+        <div>
+          <h5>Projectile Type</h5>
+
+          <Form.Select
+            value={movingObjectType}
+            aria-label="Select time"
+            onChange={updateMovingObjectType}
+          >
+            {getEnumKeys(MovingObjectType).map((type) => (
+              <option key={type} value={MovingObjectType[type]}>
+                {type}
+              </option>
+            ))}
+          </Form.Select>
+        </div>
+      </ListGroupItem>
+
       <ListGroupItem className={s.managerRow}>
         <Button onClick={zoomIn}>
           <Image src="icons/zoom-in.svg" width={16} height={16} alt="Zoom in" />
@@ -114,17 +138,21 @@ export const Manager: FC<ManagerProps> = ({
 
       <ListGroupItem className={s.managerRow}>
         <div>
-          <h5>All Missiles</h5>
+          <h5>All movingObjects</h5>
 
-          {missiles.length ? (
+          {movingObjects.length ? (
             <ListGroup className="gap-3">
-              {missiles.map((missile) => {
-                const time = missile.missile.estimatedTime?.convertToOptimal()
+              {movingObjects.map((movingObject) => {
+                const time =
+                  movingObject.movingObject.estimatedTime?.convertToOptimal()
 
                 return (
-                  <ListGroupItem className={s.missileData} key={missile.id}>
+                  <ListGroupItem
+                    className={s.missileData}
+                    key={movingObject.id}
+                  >
                     <div className={s.missileDataBadge}>
-                      <span>{missile.missile.entity.type}</span>
+                      <span>{movingObject.movingObject.entity.type}</span>
 
                       <Image
                         width={20}
@@ -132,7 +160,7 @@ export const Manager: FC<ManagerProps> = ({
                         src="/icons/hashtag.svg"
                         alt="number icon"
                       />
-                      <span>{missile.id}</span>
+                      <span>{movingObject.id}</span>
                     </div>
                     <div
                       className={'badge text-secondary ' + s.missileDataBadge}
@@ -155,7 +183,7 @@ export const Manager: FC<ManagerProps> = ({
               })}
             </ListGroup>
           ) : (
-            <span className="text-secondary">Missiles not found</span>
+            <span className="text-secondary">movingObjects not found</span>
           )}
         </div>
       </ListGroupItem>

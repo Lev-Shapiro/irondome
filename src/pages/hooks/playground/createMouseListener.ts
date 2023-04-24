@@ -1,16 +1,16 @@
 import { Coords } from 'type'
 
-import { SavedMissile } from 'dto'
+import { SavedMovingObject } from 'dto'
 
-import { MissileController } from 'controller'
+import { MovingObjectController } from 'controller/movingObject/moving-object.controller'
 
 var disabled = false
 
 export const createMouseListener = (
-  controller: MissileController,
+  controller: MovingObjectController,
   playground: HTMLDivElement,
 
-  createMissile: (coords: Coords) => SavedMissile,
+  createMissile: (coords: Coords) => SavedMovingObject,
   removeMissile: (id: number) => void,
   delay: number
 ) => {
@@ -19,7 +19,7 @@ export const createMouseListener = (
     disabled = true
     setTimeout(() => (disabled = false), delay)
 
-    const savedMissile = createMissile({
+    const savedMovingObject = createMissile({
       x: window.innerWidth - playground.offsetWidth / 2,
       y: window.innerHeight - playground.offsetHeight / 2,
     })
@@ -29,9 +29,9 @@ export const createMouseListener = (
       y: e.clientY,
     }
 
-    await controller.launch(savedMissile.missile, target)
-    removeMissile(savedMissile.id)
-    await controller.explode(savedMissile.missile, target)
+    await controller.launch(savedMovingObject.movingObject, target)
+    removeMissile(savedMovingObject.id)
+    await controller.explode(savedMovingObject.movingObject, target)
   }
 
   playground.addEventListener('mousemove', shoot)

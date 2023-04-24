@@ -1,8 +1,3 @@
-import { MissileType } from 'enum'
+import { MovingObjectEntity } from '../movingObject/moving-object.entity'
 
-export class MissileEntity {
-  constructor(
-    public readonly type: MissileType,
-    public readonly speed: number
-  ) {}
-}
+export class MissileEntity extends MovingObjectEntity {}

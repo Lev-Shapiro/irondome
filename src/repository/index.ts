@@ -1,1 +1,1 @@
-export { MissileRepository } from './missile.repository'
+export { MovingObjectsRepository } from './moving-objects.repository'

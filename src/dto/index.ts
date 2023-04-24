@@ -1,1 +1,1 @@
-export { SavedMissile } from './saved-missile'
+export { SavedMovingObject } from './saved-moving-object'
