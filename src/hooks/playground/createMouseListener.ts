@@ -4,8 +4,6 @@ import { SavedMovingObject } from 'dto'
 
 import { EffectorType } from 'enum'
 
-import { ExplosionService } from 'objects/effectors'
-
 import { MovingObjectController } from 'controller/movingObject/moving-object.controller'
 
 var disabled = false

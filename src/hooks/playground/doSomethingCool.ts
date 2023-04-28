@@ -1,6 +1,6 @@
 import { Coords } from 'type'
 
-import { SpeedDto } from 'dto/speed'
+import { Speed } from 'dto'
 
 import { DistanceUnit, EffectorType, TimeUnit } from 'enum'
 
@@ -16,7 +16,7 @@ export const doSomethingCool = async (
   const distance = DistanceUnit.Pixel
   const distanceAmount = 1
 
-  const speed = new SpeedDto(distanceAmount, distance, timeAmount, time).default
+  const speed = new Speed(distanceAmount, distance, timeAmount, time).default
 
   const doStuff = async (target: Coords) => {
     const missile = controller.create(speed, {

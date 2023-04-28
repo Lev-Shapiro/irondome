@@ -1,6 +1,6 @@
 import { DistanceUnit, TimeUnit } from 'enum'
 
-export class SpeedDto {
+export class Speed {
   constructor(
     public readonly distanceAmount: number,
     public readonly distance: DistanceUnit,

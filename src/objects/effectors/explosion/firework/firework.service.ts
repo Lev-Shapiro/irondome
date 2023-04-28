@@ -31,13 +31,13 @@ export class FireworkService {
   }
 
   async build(particleAmount: number, color: string, coords: Coords) {
-    const particles: ParticleEntity[] = []
+    const createParticle = () =>
+      new ParticleEntity(this.particlePolicy, this.ctx, color, coords)
 
-    for (var i = 0; i < particleAmount; i++) {
-      particles.push(
-        new ParticleEntity(this.particlePolicy, this.ctx, color, coords)
-      )
-    }
+    const particles: ParticleEntity[] = Array.from(
+      new Array(particleAmount),
+      createParticle
+    )
 
     this.particles[this.renderId] = particles
 
@@ -55,8 +55,8 @@ export class FireworkService {
 
     const fireworks = Object.keys(this.particles)
 
-    for (var i = 0; i < fireworks.length; i++) {
-      this.continueFirework(fireworks[i])
+    for (const firework of fireworks) {
+      this.continueFirework(firework)
     }
 
     // if firework didn't end and new render loop wasn't created => continue rendering
@@ -70,12 +70,9 @@ export class FireworkService {
 
     const alive: ParticleEntity[] = []
 
-    for (var i = 0; i < particles.length; i++) {
-      const particle = particles[i]
-
+    for (const particle of particles) {
       if (particle.move() === ParticleStatus.Alive) {
         particle.draw()
-
         alive.push(particle)
       }
     }
@@ -87,7 +84,5 @@ export class FireworkService {
     }
 
     this.particles[id] = alive
-
-    return alive
   }
 }
