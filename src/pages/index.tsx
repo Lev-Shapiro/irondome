@@ -1,22 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useManager } from 'hooks/manager/useManager'
+import { usePlayground } from 'hooks/playground/usePlayground'
+import { useMissileRepository } from 'hooks/useMissileRepository'
 
 import { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 
-import { Inter } from 'next/font/google'
 import Head from 'next/head'
 
 import { SavedMovingObject } from 'dto'
+import { SpeedDto } from 'dto/speed'
 
 import { MovingObjectType } from 'enum'
 
 import { Manager } from 'components/Manager/Manager'
-
-import { useManager } from '../../hooks/manager/useManager'
-import { usePlayground } from '../../hooks/playground/usePlayground'
-import { useMissileRepository } from '../../hooks/useMissileRepository'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const [movingObjectType, setMovingObjectType] = useState<MovingObjectType>(
@@ -29,20 +26,6 @@ export default function Home() {
 
   const [movingObjects, setMovingObjects] = useState<SavedMovingObject[]>([])
 
-  // const missileRepository = new MissileRepository()
-
-  // const add = (missile: MissileModel) => {
-  //   const savedMissile = missileRepository.add(missile)
-  //   setMissiles([...missiles, savedMissile])
-
-  //   return savedMissile
-  // }
-
-  // const remove = (id: number) => {
-  //   setMissiles(missiles.filter((m) => m.id !== id))
-  //   missileRepository.remove(id)
-  // }
-
   const { missileRepository, add, remove } =
     useMissileRepository(setMovingObjects)
 
@@ -50,17 +33,18 @@ export default function Home() {
 
   const { zoom, time, timeAmount, distance, distanceAmount } = managers
 
-  const speed = (distance * distanceAmount) / (time * timeAmount)
+  const speed = new SpeedDto(distanceAmount, distance, timeAmount, time).default
 
-  const { playgroundRef, explosionRef, houseRef, missilesRef } = usePlayground(
-    speed,
-    zoom,
+  const { playgroundRef, explosionRef, houseRef, movingObjectsRef, canvasRef } =
+    usePlayground(
+      speed,
+      zoom,
 
-    movingObjectType,
+      movingObjectType,
 
-    add,
-    remove
-  )
+      add,
+      remove
+    )
 
   return (
     <>
@@ -83,12 +67,14 @@ export default function Home() {
             />
 
             <Col id="playground" ref={playgroundRef}>
-              <div id="missiles" ref={missilesRef}></div>
+              <div id="movingObjects" ref={movingObjectsRef}></div>
               <div id="houses" ref={houseRef}></div>
               <div id="explodes" ref={explosionRef}></div>
             </Col>
           </Row>
         </Container>
+
+        <canvas id="canvas" ref={canvasRef}></canvas>
       </main>
     </>
   )

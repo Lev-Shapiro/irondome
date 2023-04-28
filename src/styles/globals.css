@@ -8,8 +8,13 @@ body {
   overflow: hidden;
 }
 
-.object {
+#movingObjects,
+#houses,
+#explodes {
   position: absolute;
+
+  width: 100%;
+  height: 100%;
 }
 
 .object.explode {
@@ -36,4 +41,24 @@ body {
 .exhaustFlame.active,
 .babaYagaExhaustFlame.active {
   display: block;
+}
+
+#manager {
+  z-index: 8;
+}
+
+#playground {
+  background-color: black;
+}
+
+#playground * {
+  z-index: 4;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  z-index: 2;
 }

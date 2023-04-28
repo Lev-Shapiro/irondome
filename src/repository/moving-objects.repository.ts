@@ -1,4 +1,4 @@
-import { MovingObjects } from 'type/moving-objects'
+import { MovingObjects } from 'type'
 
 import { SavedMovingObject } from 'dto'
 

@@ -2,7 +2,7 @@ import { Size } from 'type'
 
 import { MovingObjectType } from 'enum'
 
-import { ExplodeFactory } from 'objects/effectors'
+import { ExplosionService } from 'objects/effectors'
 import {
   BabaYagaFactory,
   MissileFactory,
@@ -19,15 +19,10 @@ import {
 
 export const getController = (
   zoom: number,
-  explosion: HTMLDivElement,
   missiles: HTMLDivElement,
-  movingObjectType: MovingObjectType
+  movingObjectType: MovingObjectType,
+  explosionService: ExplosionService
 ) => {
-  const explosionSizes: Size = {
-    width: 180 * zoom,
-    height: 180 * zoom,
-  }
-
   const movingObjectSizes: Size =
     movingObjectType != MovingObjectType.BabaYaga
       ? {
@@ -39,24 +34,22 @@ export const getController = (
           width: (554 / 8) * zoom,
         }
 
-  const explodesFactory = new ExplodeFactory(explosion, explosionSizes)
-
   switch (movingObjectType) {
     case MovingObjectType.Missile:
       const missileFactory = new MissileFactory(missiles, movingObjectSizes)
 
-      return new MissileController(missileFactory, explodesFactory)
+      return new MissileController(missileFactory, explosionService)
     case MovingObjectType.Tesla:
       const teslaFactory = new TeslaFactory(missiles, movingObjectSizes)
 
-      return new TeslaController(teslaFactory, explodesFactory)
+      return new TeslaController(teslaFactory, explosionService)
     case MovingObjectType.Vodka:
       const vodkaFactory = new VodkaFactory(missiles, movingObjectSizes)
 
-      return new VodkaController(vodkaFactory, explodesFactory)
+      return new VodkaController(vodkaFactory, explosionService)
     case MovingObjectType.BabaYaga:
       const babaYagaFactory = new BabaYagaFactory(missiles, movingObjectSizes)
 
-      return new BabaYagaController(babaYagaFactory, explodesFactory)
+      return new BabaYagaController(babaYagaFactory, explosionService)
   }
 }
