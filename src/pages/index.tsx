@@ -8,8 +8,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 
 import Head from 'next/head'
 
-import { SavedMovingObject } from 'dto'
-import { SpeedDto } from 'dto/speed'
+import { SavedMovingObject, Speed } from 'dto'
 
 import { MovingObjectType } from 'enum'
 
@@ -33,7 +32,7 @@ export default function Home() {
 
   const { zoom, time, timeAmount, distance, distanceAmount } = managers
 
-  const speed = new SpeedDto(distanceAmount, distance, timeAmount, time).default
+  const speed = new Speed(distanceAmount, distance, timeAmount, time).default
 
   const { playgroundRef, explosionRef, houseRef, movingObjectsRef, canvasRef } =
     usePlayground(

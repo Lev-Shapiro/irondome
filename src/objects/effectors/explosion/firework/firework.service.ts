@@ -1,11 +1,11 @@
 import { Coords } from 'type'
 
-import { ParticleStatus } from 'enum/firework/particle-status'
+import { ParticleStatus } from 'enum'
 
 import { ParticleEntity, ParticlePolicy } from './particle'
 
 export class FireworkService {
-  particles: { [renderId: string]: ParticleEntity[] } = {}
+  fireworks = new Map<number, ParticleEntity[]>()
 
   renderId = 0
 
@@ -17,12 +17,6 @@ export class FireworkService {
     private height: number
   ) {
     this.resize()
-
-    window.requestAnimationFrame =
-      window.requestAnimationFrame ||
-      function (callback) {
-        window.setTimeout(callback, 1000 / 60)
-      }
   }
 
   resize() {
@@ -30,16 +24,13 @@ export class FireworkService {
     this.canvas.height = this.height
   }
 
-  async build(particleAmount: number, color: string, coords: Coords) {
-    const createParticle = () =>
-      new ParticleEntity(this.particlePolicy, this.ctx, color, coords)
-
-    const particles: ParticleEntity[] = Array.from(
-      new Array(particleAmount),
-      createParticle
+  build(particleAmount: number, color: string, coords: Coords) {
+    const particles = Array.from(
+      { length: particleAmount },
+      () => new ParticleEntity(this.particlePolicy, this.ctx, color, coords)
     )
 
-    this.particles[this.renderId] = particles
+    this.fireworks.set(this.renderId, particles)
 
     this.renderId++
     this.render(this.renderId)
@@ -53,20 +44,22 @@ export class FireworkService {
     this.ctx.fillRect(0, 0, this.width, this.height)
     this.ctx.globalCompositeOperation = 'lighter'
 
-    const fireworks = Object.keys(this.particles)
+    const fireworksId = this.fireworks.keys()
 
-    for (const firework of fireworks) {
-      this.continueFirework(firework)
+    for (const id of fireworksId) {
+      this.continueFirework(id)
     }
 
-    // if firework didn't end and new render loop wasn't created => continue rendering
-    if (Object.keys(this.particles).length) {
+    // fireworks didn't expire => continue animating
+    if (this.fireworks.size) {
       window.requestAnimationFrame(() => this.render(currId))
     }
   }
 
-  private continueFirework(id: string) {
-    const particles = this.particles[id]
+  private continueFirework(id: number) {
+    const particles = this.fireworks.get(id)
+
+    if (!particles) throw new Error("firework particles didn't load. strange.")
 
     const alive: ParticleEntity[] = []
 
@@ -77,12 +70,8 @@ export class FireworkService {
       }
     }
 
-    if (alive.length === 0) {
-      delete this.particles[id]
+    if (alive.length === 0) return this.fireworks.delete(id)
 
-      return
-    }
-
-    this.particles[id] = alive
+    this.fireworks.set(id, alive)
   }
 }
