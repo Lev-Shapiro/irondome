@@ -1,8 +1,8 @@
 import { Coords } from 'type'
 
-import { ParticlePolicy } from './'
+import { ParticlePolicy } from './particle.policy'
 
-export class ParticleEntity {
+export class ParticleEntity extends ParticlePolicy {
   x: number
   y: number
 
@@ -16,11 +16,12 @@ export class ParticleEntity {
   readonly gravity = 0.05
 
   constructor(
-    private policy: ParticlePolicy,
     private ctx: CanvasRenderingContext2D,
     private color: string,
     coords: Coords
   ) {
+    super()
+
     this.x = coords.x - this.width / 2
     this.y = coords.y - this.height / 2
 
@@ -40,7 +41,7 @@ export class ParticleEntity {
     this.y += this.vy
     this.alpha -= 0.01
 
-    return this.policy.isAlive(this.x, this.y, this.width, this.alpha)
+    return this.isAlive(this.x, this.y, this.width, this.alpha)
   }
 
   draw() {

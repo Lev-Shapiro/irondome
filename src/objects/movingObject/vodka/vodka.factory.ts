@@ -2,7 +2,7 @@ import type { Coords } from 'type'
 
 import { ObjectFactory } from 'objects/object'
 
-import { VodkaElement } from './vodka.element'
+import { MovingObjectElement } from '../shared/moving-object.element'
 
 export class VodkaFactory extends ObjectFactory {
   build(coords: Coords) {
@@ -11,7 +11,7 @@ export class VodkaFactory extends ObjectFactory {
     const wrapper = this.wrap(vodkaImage)
     wrapper.className = 'object'
 
-    const element = new VodkaElement(wrapper, vodkaImage, this.size)
+    const element = new MovingObjectElement(wrapper, vodkaImage, this.size)
 
     element.setCoords(coords)
 

@@ -2,7 +2,7 @@ import { Coords } from 'type'
 
 import { ParticleStatus } from 'enum'
 
-import { ParticleEntity, ParticlePolicy } from './particle'
+import { ParticleEntity } from './particle/particle.entity'
 
 export class FireworkService {
   fireworks = new Map<number, ParticleEntity[]>()
@@ -12,7 +12,6 @@ export class FireworkService {
   constructor(
     private canvas: HTMLCanvasElement,
     private ctx: CanvasRenderingContext2D,
-    private particlePolicy: ParticlePolicy,
     private width: number,
     private height: number
   ) {
@@ -27,7 +26,7 @@ export class FireworkService {
   build(particleAmount: number, color: string, coords: Coords) {
     const particles = Array.from(
       { length: particleAmount },
-      () => new ParticleEntity(this.particlePolicy, this.ctx, color, coords)
+      () => new ParticleEntity(this.ctx, color, coords)
     )
 
     this.fireworks.set(this.renderId, particles)

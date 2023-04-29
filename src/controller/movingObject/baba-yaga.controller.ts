@@ -1,9 +1,9 @@
 import { Coords } from 'type'
 
 import {
-  BabaYagaEntity,
   BabaYagaFactory,
   BabaYagaModel,
+  MovingObjectEntity,
 } from 'objects/movingObject'
 
 import { MovingObjectController } from './moving-object.controller'
@@ -15,7 +15,7 @@ export class BabaYagaController extends MovingObjectController<
   create(speed: number, coords: Coords): BabaYagaModel {
     const element = this.factory.build(coords)
 
-    const entity = new BabaYagaEntity('BabaYaga', speed)
+    const entity = new MovingObjectEntity('BabaYaga', speed)
     const model = new BabaYagaModel(element, entity, coords)
 
     return model

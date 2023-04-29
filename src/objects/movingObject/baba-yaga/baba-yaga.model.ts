@@ -1,19 +1,17 @@
 import type { Coords } from 'type'
 
-import { BabaYagaElement, BabaYagaEntity } from '.'
-import { MovingObjectModel } from '../movingObject'
+import { getRotateDegree } from 'scripts/getRotateDegree'
 
-export class BabaYagaModel extends MovingObjectModel<
-  BabaYagaElement,
-  BabaYagaEntity
-> {
+import { BabaYagaElement } from '.'
+import { MovingObjectModel } from '../abstract'
+
+export class BabaYagaModel extends MovingObjectModel<BabaYagaElement> {
   renderInterval = 20
 
   rotate(to: Coords) {
     const from = this.coords
 
-    const coords =
-      (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 182.5
+    const coords = getRotateDegree(to, from) + 182.5
 
     this.element.rotate(coords)
   }

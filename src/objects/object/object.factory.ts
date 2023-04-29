@@ -11,7 +11,8 @@ export abstract class ObjectFactory {
   private createParent() {
     const parent = document.createElement('div')
 
-    parent.style.position = 'absolute'
+    parent.className = 'object'
+
     parent.style.width = this.size.width + 'px'
     parent.style.height = this.size.height + 'px'
 

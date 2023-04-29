@@ -2,8 +2,8 @@ import { Coords } from 'type'
 
 import { EffectorType } from 'enum'
 
-import { ExplodeFactory } from '../explode'
-import { FireworkFactory } from '../firework'
+import { ExplodeFactory } from './explode'
+import { FireworkFactory } from './firework'
 
 export class ExplosionService {
   constructor(
@@ -21,7 +21,7 @@ export class ExplosionService {
         return
 
       case EffectorType.Firework:
-        await this.fireworkFactory.build(target)
+        this.fireworkFactory.build(target)
         return
     }
   }

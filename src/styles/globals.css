@@ -17,6 +17,10 @@ body {
   height: 100%;
 }
 
+.object {
+  position: absolute;
+}
+
 .object.explode {
   transform: translate(-50%, -50%);
 }

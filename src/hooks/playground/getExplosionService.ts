@@ -6,7 +6,6 @@ import {
   FireworkFactory,
   FireworkService,
 } from 'objects/effectors'
-import { ParticlePolicy } from 'objects/effectors/explosion/firework/particle'
 
 export const getExplosionService = (
   explosionElement: HTMLDivElement,
@@ -19,15 +18,7 @@ export const getExplosionService = (
 
   if (!ctx) return
 
-  const particlePolicy = new ParticlePolicy()
-
-  const fireworkService = new FireworkService(
-    canvasElement,
-    ctx,
-    particlePolicy,
-    width,
-    height
-  )
+  const fireworkService = new FireworkService(canvasElement, ctx, width, height)
 
   const fireworkFactory = new FireworkFactory(fireworkService)
 

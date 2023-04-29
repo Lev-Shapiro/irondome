@@ -8,10 +8,9 @@ import { MovingObjectType } from 'enum'
 
 import { getController } from 'scripts/getController'
 
-import { MovingObjectModel } from 'objects/movingObject/movingObject'
+import { MovingObjectModel } from 'objects/movingObject/abstract'
 
 import { createMouseListener } from './createMouseListener'
-import { doSomethingCool } from './doSomethingCool'
 import { getExplosionService } from './getExplosionService'
 
 export const usePlayground = (

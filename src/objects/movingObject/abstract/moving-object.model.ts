@@ -4,12 +4,13 @@ import { TimeConverter } from 'dto/time-converter'
 
 import { TimeUnit } from 'enum'
 
-import { ObjectElement, ObjectModel } from 'objects/object'
+import { ObjectModel } from 'objects/object'
 
-import { MovingObjectEntity } from './moving-object.entity'
+import { MovingObjectElement } from '../shared/moving-object.element'
+import { MovingObjectEntity } from '../shared/moving-object.entity'
 
 export abstract class MovingObjectModel<
-  Element extends ObjectElement = ObjectElement,
+  Element extends MovingObjectElement = MovingObjectElement,
   Entity extends MovingObjectEntity = MovingObjectEntity
 > extends ObjectModel<Element, Entity> {
   abstract renderInterval: number

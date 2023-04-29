@@ -16,7 +16,6 @@ export class MissileFactory extends ObjectFactory {
     )
 
     const wrapper = this.wrap(missileImage, missileFireImage)
-    wrapper.className = 'object'
 
     const element = new MissileElement(
       wrapper,

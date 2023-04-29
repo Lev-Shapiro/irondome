@@ -5,11 +5,11 @@ import { FireworkService } from '.'
 export class FireworkFactory {
   constructor(private service: FireworkService) {}
 
-  async build(coords: Coords) {
+  build(coords: Coords) {
     const particleAmount = this.randomParticleAmount(200, 250)
     const color = this.generateColor()
 
-    await this.service.build(particleAmount, color, coords)
+    this.service.build(particleAmount, color, coords)
   }
 
   private generateColor() {

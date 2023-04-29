@@ -1,16 +1,16 @@
 import type { Coords } from 'type'
 
-import { VodkaElement, VodkaEntity } from '.'
-import { MovingObjectModel } from '../movingObject'
+import { getRotateDegree } from 'scripts/getRotateDegree'
 
-export class VodkaModel extends MovingObjectModel<VodkaElement, VodkaEntity> {
+import { MovingObjectModel } from '../abstract'
+
+export class VodkaModel extends MovingObjectModel {
   renderInterval = 20
 
   rotate(to: Coords) {
     const from = this.coords
 
-    const coords =
-      (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI + 270
+    const coords = getRotateDegree(to, from) + 270
 
     this.element.rotate(coords)
   }

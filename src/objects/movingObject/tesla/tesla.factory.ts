@@ -2,7 +2,7 @@ import type { Coords } from 'type'
 
 import { ObjectFactory } from 'objects/object'
 
-import { TeslaElement } from './tesla.element'
+import { MovingObjectElement } from '../shared/moving-object.element'
 
 export class TeslaFactory extends ObjectFactory {
   build(coords: Coords) {
@@ -11,7 +11,7 @@ export class TeslaFactory extends ObjectFactory {
     const wrapper = this.wrap(teslaImage)
     wrapper.className = 'object'
 
-    const element = new TeslaElement(wrapper, teslaImage, this.size)
+    const element = new MovingObjectElement(wrapper, teslaImage, this.size)
 
     element.setCoords(coords)
 

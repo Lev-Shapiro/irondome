@@ -1,9 +1,9 @@
 import { Coords } from 'type'
 
 import {
-  MissileEntity,
   MissileFactory,
   MissileModel,
+  MovingObjectEntity,
 } from 'objects/movingObject'
 
 import { MovingObjectController } from './moving-object.controller'
@@ -15,7 +15,7 @@ export class MissileController extends MovingObjectController<
   create(speed: number, coords: Coords): MissileModel {
     const element = this.factory.build(coords)
 
-    const entity = new MissileEntity('Falcon 9', speed)
+    const entity = new MovingObjectEntity('Falcon 9', speed)
     const model = new MissileModel(element, entity, coords)
 
     return model

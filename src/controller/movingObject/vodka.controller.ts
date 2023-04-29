@@ -1,6 +1,10 @@
 import { Coords } from 'type'
 
-import { VodkaEntity, VodkaFactory, VodkaModel } from 'objects/movingObject'
+import {
+  MovingObjectEntity,
+  VodkaFactory,
+  VodkaModel,
+} from 'objects/movingObject'
 
 import { MovingObjectController } from './moving-object.controller'
 
@@ -11,7 +15,7 @@ export class VodkaController extends MovingObjectController<
   create(speed: number, coords: Coords): VodkaModel {
     const element = this.factory.build(coords)
 
-    const entity = new VodkaEntity('vodka', speed)
+    const entity = new MovingObjectEntity('vodka', speed)
     const model = new VodkaModel(element, entity, coords)
 
     return model

@@ -3,7 +3,7 @@ import { Coords } from 'type'
 import { EffectorType } from 'enum'
 
 import { ExplosionService } from 'objects/effectors'
-import { MovingObjectModel } from 'objects/movingObject/movingObject'
+import { MovingObjectModel } from 'objects/movingObject/abstract'
 import { ObjectFactory, ObjectModel } from 'objects/object'
 
 export abstract class MovingObjectController<
