@@ -16,7 +16,6 @@ export class BabaYagaFactory extends ObjectFactory {
     )
 
     const wrapper = this.wrap(babaYagaImage, ultraFireImage)
-    wrapper.className = 'object'
 
     const element = new BabaYagaElement(
       wrapper,

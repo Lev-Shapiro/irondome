@@ -10,7 +10,6 @@ export abstract class ObjectFactory {
 
   private createParent() {
     const parent = document.createElement('div')
-
     parent.className = 'object'
 
     parent.style.width = this.size.width + 'px'

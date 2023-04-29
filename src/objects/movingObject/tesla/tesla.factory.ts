@@ -9,7 +9,6 @@ export class TeslaFactory extends ObjectFactory {
     const teslaImage = this.createImage(this.size, 'tesla.webp')
 
     const wrapper = this.wrap(teslaImage)
-    wrapper.className = 'object'
 
     const element = new MovingObjectElement(wrapper, teslaImage, this.size)
 

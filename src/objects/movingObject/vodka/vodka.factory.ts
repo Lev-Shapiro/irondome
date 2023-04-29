@@ -9,7 +9,6 @@ export class VodkaFactory extends ObjectFactory {
     const vodkaImage = this.createImage(this.size, 'vodka.webp')
 
     const wrapper = this.wrap(vodkaImage)
-    wrapper.className = 'object'
 
     const element = new MovingObjectElement(wrapper, vodkaImage, this.size)
 
