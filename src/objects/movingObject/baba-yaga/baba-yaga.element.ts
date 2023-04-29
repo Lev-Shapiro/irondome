@@ -1,8 +1,8 @@
 import { Size } from 'type'
 
-import { ObjectElement } from 'objects/object'
+import { MovingObjectElement } from '../shared/moving-object.element'
 
-export class BabaYagaElement extends ObjectElement {
+export class BabaYagaElement extends MovingObjectElement {
   constructor(
     wrapper: HTMLDivElement,
     element: HTMLImageElement,
@@ -10,10 +10,6 @@ export class BabaYagaElement extends ObjectElement {
     size: Size
   ) {
     super(wrapper, element, size)
-  }
-
-  rotate(deg: number) {
-    this.wrapper.style.transform = `rotate(${deg}deg)`
   }
 
   launch() {

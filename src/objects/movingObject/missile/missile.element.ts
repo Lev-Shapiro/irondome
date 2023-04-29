@@ -1,8 +1,8 @@
 import { Size } from 'type'
 
-import { ObjectElement } from 'objects/object'
+import { MovingObjectElement } from '../shared/moving-object.element'
 
-export class MissileElement extends ObjectElement {
+export class MissileElement extends MovingObjectElement {
   constructor(
     wrapper: HTMLDivElement,
     element: HTMLImageElement,
@@ -10,10 +10,6 @@ export class MissileElement extends ObjectElement {
     size: Size
   ) {
     super(wrapper, element, size)
-  }
-
-  rotate(deg: number) {
-    this.wrapper.style.transform = `rotate(${deg}deg)`
   }
 
   launch() {

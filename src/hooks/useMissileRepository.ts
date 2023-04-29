@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useMemo } from 'react'
 
 import { SavedMovingObject } from 'dto'
 
-import { MovingObjectModel } from 'objects/movingObject/movingObject'
+import { MovingObjectModel } from 'objects/movingObject/abstract'
 
 import { MovingObjectsRepository } from 'repository'
 

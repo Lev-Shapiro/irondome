@@ -1,6 +1,6 @@
 import { createRef, useEffect } from 'react'
 
-import { Coords } from 'type'
+import { Coords, Size } from 'type'
 
 import { SavedMovingObject } from 'dto'
 
@@ -8,9 +8,10 @@ import { MovingObjectType } from 'enum'
 
 import { getController } from 'scripts/getController'
 
-import { MovingObjectModel } from 'objects/movingObject/movingObject'
+import { MovingObjectModel } from 'objects/movingObject/abstract'
 
 import { createMouseListener } from './createMouseListener'
+import { getExplosionService } from './getExplosionService'
 
 export const usePlayground = (
   speed: number,
@@ -20,24 +21,43 @@ export const usePlayground = (
   add: (movingObject: MovingObjectModel) => SavedMovingObject,
   remove: (id: number) => void
 ) => {
+  const canvasRef = createRef<HTMLCanvasElement>()
   const playgroundRef = createRef<HTMLDivElement>()
   const explosionRef = createRef<HTMLDivElement>()
   const houseRef = createRef<HTMLDivElement>()
-  const missilesRef = createRef<HTMLDivElement>()
+  const movingObjectsRef = createRef<HTMLDivElement>()
 
   useEffect(() => {
     const playground = playgroundRef.current
     const explosion = explosionRef.current
-    const missiles = missilesRef.current
+    const movingObjects = movingObjectsRef.current
+    const canvas = canvasRef.current
 
-    if (!playground || !explosion || !missiles) return
+    const explosionSizes: Size = {
+      width: 180 * zoom,
+      height: 180 * zoom,
+    }
+
+    if (!playground || !explosion || !movingObjects || !canvas) return
+
+    const explosionService = getExplosionService(
+      explosion,
+      canvas,
+      playground.offsetWidth,
+      window.innerHeight,
+      explosionSizes
+    )
+
+    if (!explosionService) return
 
     const controller = getController(
       zoom,
-      explosion,
-      missiles,
-      movingObjectType
+      movingObjects,
+      movingObjectType,
+      explosionService
     )
+
+    // doSomethingCool(controller, playground.offsetWidth)
 
     const createMissile = (coords: Coords) => {
       const model = controller.create(speed * zoom, coords)
@@ -55,13 +75,19 @@ export const usePlayground = (
       200
     )
 
-    return () => playground.removeEventListener('mousemove', listener)
+    // window.addEventListener('resize', fireworkEntity.resize, false)
+
+    return () => {
+      window.removeEventListener('mousemove', listener)
+      // window.removeEventListener('resize', fireworkEntity.resize, false)
+    }
   })
 
   return {
     playgroundRef,
     explosionRef,
     houseRef,
-    missilesRef,
+    movingObjectsRef,
+    canvasRef,
   }
 }

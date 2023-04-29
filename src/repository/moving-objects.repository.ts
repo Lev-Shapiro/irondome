@@ -1,8 +1,8 @@
-import { MovingObjects } from 'type/moving-objects'
+import { MovingObjects } from 'type'
 
 import { SavedMovingObject } from 'dto'
 
-import { MovingObjectModel } from 'objects/movingObject/movingObject'
+import { MovingObjectModel } from 'objects/movingObject/abstract'
 
 export class MovingObjectsRepository {
   private newId = 0

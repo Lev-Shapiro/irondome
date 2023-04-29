@@ -2,6 +2,8 @@ import { Coords } from 'type'
 
 import { SavedMovingObject } from 'dto'
 
+import { EffectorType } from 'enum'
+
 import { MovingObjectController } from 'controller/movingObject/moving-object.controller'
 
 var disabled = false
@@ -14,27 +16,36 @@ export const createMouseListener = (
   removeMissile: (id: number) => void,
   delay: number
 ) => {
+  const startX = window.innerWidth - playground.offsetWidth
   const shoot = async (e: MouseEvent) => {
+    if (e.clientX < startX) return
+
     if (disabled) return
     disabled = true
     setTimeout(() => (disabled = false), delay)
 
     const savedMovingObject = createMissile({
-      x: window.innerWidth - playground.offsetWidth / 2,
-      y: window.innerHeight - playground.offsetHeight / 2,
+      x: playground.offsetWidth / 2,
+      y: playground.offsetHeight / 2,
     })
 
     const target = {
-      x: e.clientX,
+      x: e.clientX - startX,
       y: e.clientY,
     }
 
     await controller.launch(savedMovingObject.movingObject, target)
+
     removeMissile(savedMovingObject.id)
-    await controller.explode(savedMovingObject.movingObject, target)
+
+    await controller.destroy(
+      EffectorType.Firework,
+      savedMovingObject.movingObject,
+      target
+    )
   }
 
-  playground.addEventListener('mousemove', shoot)
+  window.addEventListener('mousemove', shoot)
 
   return shoot
 }

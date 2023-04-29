@@ -1,4 +1,4 @@
-import { MovingObjectModel } from 'objects/movingObject/movingObject'
+import { MovingObjectModel } from 'objects/movingObject/abstract'
 
 export class SavedMovingObject {
   constructor(
